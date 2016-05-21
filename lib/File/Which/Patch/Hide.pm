@@ -70,6 +70,12 @@ sub patch_data {
 
  % PERL5OPT=-MFile::Which::Patch::Hide=-prog,'foo;bar' app.pl
 
+C<app.pl> will think that C<foo> and C<bar> are not in C<PATH> even though they
+actually are.
+
+
+=head1 DESCRIPTION
+
 This module can be used to simulate the absence of certain programs. This module
 works by patching (wrapping) L<File::Which>'s C<which()> routine to remove the
 result if the programs that want to be hidden are listed in the result. So only
@@ -82,5 +88,11 @@ my test scripts to optionally run tests when node.js is available. So to
 simulate a condition where node.js is not available:
 
  % PERL5OPT=-MFile::Which::Patch::Hide=-prog,'node;nodejs' prove ...
+
+
+=head1 SEE ALSO
+
+To simulate tha absence of some perl modules, you can try: L<lib::filter>,
+L<lib::disallow>.
 
 =cut
