@@ -68,6 +68,19 @@ sub patch_data {
 
 =head1 SYNOPSIS
 
- perl -MFile::Which::Patch::Hide=-prog,'foo;bar' ...
+ % PERL5OPT=-MFile::Which::Patch::Hide=-prog,'foo;bar' app.pl
+
+This module can be used to simulate the absence of certain programs. This module
+works by patching (wrapping) L<File::Which>'s C<which()> routine to remove the
+result if the programs that want to be hidden are listed in the result. So only
+programs that use C<which()> will be fooled.
+
+An example of how I use this module: L<Nodejs::Util> has a routine
+C<get_nodejs_path()> which uses C<File::Which::which()> to check for the
+existence of node.js binary. The C<get_nodejs_path()> routine is used in some of
+my test scripts to optionally run tests when node.js is available. So to
+simulate a condition where node.js is not available:
+
+ % PERL5OPT=-MFile::Which::Patch::Hide=-prog,'node;nodejs' prove ...
 
 =cut
