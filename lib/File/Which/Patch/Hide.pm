@@ -50,6 +50,8 @@ sub patch_data {
         v => 3,
         config => {
             -prog => {
+                summary => 'A string containing semicolon-separated list '.
+                    'of program names to hide',
                 schema => 'str*',
             },
         },
@@ -90,7 +92,7 @@ simulate a condition where node.js is not available:
  % PERL5OPT=-MFile::Which::Patch::Hide=-prog,'node;nodejs' prove ...
 
 
-=head1 SEE ALSO
+=head1 append:SEE ALSO
 
 To simulate tha absence of some perl modules, you can try: L<lib::filter>,
 L<lib::disallow>.
