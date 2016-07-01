@@ -30,7 +30,7 @@ my $w_which = sub {
     my @filtered_res;
     for my $path (@res) {
         my ($vol, $dir, $file) = File::Spec->splitpath($path);
-        next if grep { $file eq $_ } @prog;
+        next if grep { m![/\\]! ? $path eq $_ : $file eq $_ } @prog;
         push @filtered_res, $path;
     }
 
@@ -72,8 +72,13 @@ sub patch_data {
 
  % PERL5OPT=-MFile::Which::Patch::Hide=-prog,'foo;bar' app.pl
 
-C<app.pl> will think that C<foo> and C<bar> are not in C<PATH> even though they
-actually are.
+In the above example C<app.pl> will think that C<foo> and C<bar> are not in
+C<PATH> even though they actually are.
+
+ % PERL5OPT=-MFile::Which::Patch::Hide=-prog,'/usr/bin/foo' app.pl
+
+The above example hides just C</usr/bin/foo> but C<foo> might be available in
+another directory in PATH.
 
 
 =head1 DESCRIPTION
